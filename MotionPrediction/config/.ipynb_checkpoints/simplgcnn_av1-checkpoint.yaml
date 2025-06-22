@@ -1,0 +1,41 @@
+model:
+  name: SimplGCNN
+  gcn_layers: 2
+  gcn_hidden_dim: 64
+  attention_heads: 4
+  dropout: 0.1
+  bezier_degree: 3
+
+train:
+  batch_size: 64
+  epochs: 30
+  learning_rate: 0.001
+  weight_decay: 1e-4
+  seed: 42
+  log_interval: 10
+  save_interval: 5
+  device: "mps"
+
+optimizer:
+  type: Adam
+
+scheduler:
+  type: StepLR
+  step_size: 10
+  gamma: 0.5
+
+data:
+  dataset: argoverse1
+  features_dir: Dataset/argodataset/argoverse/
+  train_path: Dataset/argodataset/argoverse/train/
+  val_path: Dataset/argodataset/argoverse/val/
+  test_path: Dataset/argodataset/argoverse/test_obs/
+  obs_len: 20
+  pred_len: 30
+  num_agents: 60
+
+adv_cfg_path: config.simplgcnn_av1
+
+output:
+  ckpt_dir: checkpoints/simplgcnn_av1/
+  vis_dir: outputs/simplgcnn_av1/
